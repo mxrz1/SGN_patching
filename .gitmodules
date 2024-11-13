@@ -1,6 +1,0 @@
-[submodule "uncertainty-baselines"]
-	path = uncertainty-baselines
-	url = ./uncertainty-baselines
-[submodule "edward2"]
-	path = edward2
-	url = ./edward2
