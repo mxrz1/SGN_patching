@@ -185,7 +185,8 @@ def _create_normal(mu, r, mu_ema, num_classes, labels, exponent):
 def _extract_hyperparameter_dictionary():
   """Create the dictionary of hyperparameters from FLAGS."""
   flags_as_dict = FLAGS.flag_values_dict()
-  hp_keys = ub.models.models.wide_resnet.HP_KEYS
+  #hp_keys = ub.models.models.wide_resnet.HP_KEYS
+  hp_keys = ub.models.get_wide_resnet_hp_keys()
   hps = {k: flags_as_dict[k] for k in hp_keys}
   return hps
 
@@ -204,8 +205,12 @@ def main(argv):
 
   # Use GPU
   strategy = tf.distribute.MirroredStrategy()
+  
+  _ds_builder=tfds.builder(FLAGS.dataset, data_dir=data_dir)
+  _ds_builder.download_and_prepare()
 
-  ds_info = tfds.builder(FLAGS.dataset, data_dir=data_dir).info
+  #ds_info = tfds.builder(FLAGS.dataset, data_dir=data_dir).info
+  ds_info = _ds_builder.info
   batch_size = FLAGS.per_core_batch_size * FLAGS.num_cores
   train_dataset_size = (
       ds_info.splits['train'].num_examples * FLAGS.train_proportion)
