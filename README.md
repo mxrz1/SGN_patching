@@ -1,3 +1,10 @@
+# (Patched) Shifted Gaussian Noise
+This is a modifed version of the SGN repository made by Erik Englesson. More specifically, it contains patches to SGN repository and its dependents edward2 and uncertainty-baselines to be able to run a specific working build using Tensorflow 2.8.1
+
+This was ran and tested on Ubuntu Server 24.0.1 with 12 Cores and 16 GB RAM.
+
+See installation instructions in INSTALL.md
+
 # Shifted Gaussian Noise (SGN)
 The official implementation of our ICLR 2024 paper: [Robust Classification via Regression for Learning with Noisy Labels](https://openreview.net/forum?id=wfgZc3IMqo).
 
