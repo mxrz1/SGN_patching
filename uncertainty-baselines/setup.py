@@ -51,7 +51,7 @@ setup(
     extras_require={
         'experimental': [],
         'models': [
-            'edward2 @ file://localhost/home/butter/SGN/edward2#egg=edward2',
+            'edward2 @ file://localhost/' + os.path.join(os.getcwd(), '..') + '/edward2#egg=edward2',
             'pandas',
             'scipy',
         ],
