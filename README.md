@@ -5,6 +5,9 @@ This was ran and tested on Ubuntu Server 24.0.1 with 12 Cores and 16 GB RAM.
 
 See installation instructions in INSTALL.md
 
+**NOTE**
+Clothing1M and Webvision tests are unavailalbe as they run into runtime issues. Working on a fix for that.
+
 # Shifted Gaussian Noise (SGN)
 The official implementation of our ICLR 2024 paper: [Robust Classification via Regression for Learning with Noisy Labels](https://openreview.net/forum?id=wfgZc3IMqo).
 
