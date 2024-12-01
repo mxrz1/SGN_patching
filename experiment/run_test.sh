@@ -29,6 +29,10 @@ if [ ! -d $TEST_LOG_DIR ]; then
 	mkdir $TEST_LOG_DIR
 fi
 
+# Unable to get GPU working properly
+# Issue similar to: https://github.com/rpautrat/SuperPoint/issues/225
+export CUDA_VISIBLE_DEVICES=-1
+
 # Run passed command with flags
 # ./run_test.sh <path_to_SGN> <test_name>
 
