@@ -25,6 +25,7 @@ fi
 cd $SGN_DIR
 source .venv/bin/activate
 
+2>&1
 echo "============== RUNNING $DSET TESTS ================"
 echo
 

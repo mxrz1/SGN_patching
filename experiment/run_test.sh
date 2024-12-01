@@ -29,12 +29,8 @@ if [ ! -d $TEST_LOG_DIR ]; then
 	mkdir $TEST_LOG_DIR
 fi
 
-# Python tensorflow outputs to stderr
-# Redirect to stdout for tee to capture
-2>&1
-
 # Run passed command with flags
 # ./run_test.sh <path_to_SGN> <test_name>
 
 SCRIPT=$TEST.sh
-./$SCRIPT $1 | tee $TEST_LOG_DIR/$TEST-$(date +[%Y%m%d%H%M]).txt
+./$SCRIPT $1 2>&1 | tee $TEST_LOG_DIR/$TEST-$(date +%Y%m%d%H%M).txt
