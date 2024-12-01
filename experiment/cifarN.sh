@@ -34,7 +34,7 @@ TEST_NAME=aggre
 
 if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
 	python src/cifar/sgn.py --data_dir=$DATA_DIR \
-        	                --output_dir=$OUT_DIR \
+        	                --output_dir=$OUT_DIR/$TEST_NAME \
                 	        --dataset cifar10_label_corrupted \
 				--corruption_type=aggre \
                         	--checkpoint_interval=$CP_INTERVAL
@@ -53,7 +53,7 @@ TEST_NAME=rand1
 
 if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
 	python src/cifar/sgn.py --data_dir=$DATA_DIR \
-        	                --output_dir=$OUT_DIR \
+        	                --output_dir=$OUT_DIR/$TEST_NAME \
                 	        --dataset cifar10_label_corrupted \
 				--corruption_type rand1 \
                         	--checkpoint_interval=$CP_INTERVAL
@@ -71,7 +71,7 @@ TEST_NAME=rand2
 
 if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
 	python src/cifar/sgn.py --data_dir=$DATA_DIR \
-        	                --output_dir=$OUT_DIR \
+        	                --output_dir=$OUT_DIR/$TEST_NAME \
                 	        --dataset cifar10_label_corrupted  \
 				--corruption_type rand2 \
                         	--checkpoint_interval=$CP_INTERVAL
@@ -89,7 +89,7 @@ TEST_NAME=rand3
 
 if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
 	python src/cifar/sgn.py --data_dir=$DATA_DIR \
-        	                --output_dir=$OUT_DIR \
+        	                --output_dir=$OUT_DIR/$TEST_NAME \
                 	        --dataset cifar10_label_corrupted \
 				--corruption_type rand3 \
                         	--checkpoint_interval=$CP_INTERVAL
@@ -107,7 +107,7 @@ TEST_NAME=worst
 
 if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
 	python src/cifar/sgn.py --data_dir=$DATA_DIR \
-        	                --output_dir=$OUT_DIR \
+        	                --output_dir=$OUT_DIR/$TEST_NAME \
                 	        --dataset cifar10_label_corrupted \
 				--corruption_type worst \
                         	--checkpoint_interval=$CP_INTERVAL
@@ -119,35 +119,15 @@ else
 	echo "TEST CACHE FOUND, SKIPPING"
 fi
 
-echo "============== CIFAR-100 ================"
+echo "============== CIFAR-100N ================"
 echo
 TEST_NAME=cifar100
 
 if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
 	python3.8 src/cifar/sgn.py --data_dir=$DATA_DIR \
-        	                --output_dir=$OUT_DIR \
+        	                --output_dir=$OUT_DIR/$TEST_NAME \
                 	        --dataset cifar100 \
 				--corruption_type c100noise \
-                        	--checkpoint_interval=$CP_INTERVAL
-
-	if [ -z $? ]; then
-		touch $CACHE_DIR/$TEST_NAME
-	fi
-else
-	echo "TEST CACHE FOUND, SKIPPING"
-fi
-
-echo "============== CIFAR-100N ================"
-echo
-TEST_NAME=asym60
-
-if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
-	python3.8 src/cifar/sgn.py --data_dir=$DATA_DIR \
-        	                --output_dir=$OUT_DIR \
-                	        --dataset cifar10 \
-				--noisy_labels \
-				--corruption_type asym \
-				--severity 0.6 \
                         	--checkpoint_interval=$CP_INTERVAL
 
 	if [ -z $? ]; then

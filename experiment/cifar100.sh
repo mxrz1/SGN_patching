@@ -34,7 +34,7 @@ TEST_NAME=no_noise
 
 if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
 	python src/cifar/sgn.py --data_dir=$DATA_DIR \
-        	                --output_dir=$OUT_DIR \
+        	                --output_dir=$OUT_DIR/$TEST_NAME \
                 	        --dataset cifar100 \
                         	--checkpoint_interval=$CP_INTERVAL
 
@@ -52,7 +52,7 @@ TEST_NAME=sym20
 
 if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
 	python src/cifar/sgn.py --data_dir=$DATA_DIR \
-        	                --output_dir=$OUT_DIR \
+        	                --output_dir=$OUT_DIR/$TEST_NAME \
                 	        --dataset cifar100 \
 				--noisy_labels \
 				--corruption_type sym \
@@ -72,7 +72,7 @@ TEST_NAME=sym40
 
 if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
 	python src/cifar/sgn.py --data_dir=$DATA_DIR \
-        	                --output_dir=$OUT_DIR \
+				--output_dir=$OUT_DIR/$TEST_NAME \
                 	        --dataset cifar100 \
 				--noisy_labels \
 				--corruption_type sym \
@@ -92,7 +92,7 @@ TEST_NAME=sym60
 
 if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
 	python src/cifar/sgn.py --data_dir=$DATA_DIR \
-        	                --output_dir=$OUT_DIR \
+        	                --output_dir=$OUT_DIR/$TEST_NAME \
                 	        --dataset cifar100 \
 				--noisy_labels \
 				--corruption_type sym \
@@ -112,7 +112,7 @@ TEST_NAME=asym20
 
 if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
 	python src/cifar/sgn.py --data_dir=$DATA_DIR \
-        	                --output_dir=$OUT_DIR \
+        	                --output_dir=$OUT_DIR/$TEST_NAME \
                 	        --dataset cifar100 \
 				--noisy_labels \
 				--corruption_type asym \
@@ -132,7 +132,7 @@ TEST_NAME=asym40
 
 if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
 	python src/cifar/sgn.py --data_dir=$DATA_DIR \
-        	                --output_dir=$OUT_DIR \
+        	                --output_dir=$OUT_DIR/$TEST_NAME \
                 	        --dataset cifar100 \
 				--noisy_labels \
 				--corruption_type asym \
@@ -152,7 +152,7 @@ TEST_NAME=asym60
 
 if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
 	python src/cifar/sgn.py --data_dir=$DATA_DIR \
-        	                --output_dir=$OUT_DIR \
+        	                --output_dir=$OUT_DIR/$TEST_NAME \
                 	        --dataset cifar100 \
 				--noisy_labels \
 				--corruption_type asym \
