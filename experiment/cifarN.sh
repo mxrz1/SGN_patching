@@ -3,6 +3,7 @@
 PWD=$(pwd)
 DSET=cifarN
 CP_INTERVAL=10
+EPOCHS=300
 DATA_DIR=$PWD/data/$DSET
 OUT_DIR=$PWD/out/$DSET
 CACHE_DIR=$PWD/.cache/$DSET
@@ -37,6 +38,7 @@ if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
         	                --output_dir=$OUT_DIR/$TEST_NAME \
                 	        --dataset cifar10_label_corrupted \
 				--corruption_type=aggre \
+				--train_epochs=$EPOCHS \
                         	--checkpoint_interval=$CP_INTERVAL
 
 	if [ -z $? ]; then
@@ -56,6 +58,7 @@ if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
         	                --output_dir=$OUT_DIR/$TEST_NAME \
                 	        --dataset cifar10_label_corrupted \
 				--corruption_type rand1 \
+				--train_epochs=$EPOCHS \
                         	--checkpoint_interval=$CP_INTERVAL
 
 	if [ -z $? ]; then
@@ -74,6 +77,7 @@ if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
         	                --output_dir=$OUT_DIR/$TEST_NAME \
                 	        --dataset cifar10_label_corrupted  \
 				--corruption_type rand2 \
+				--train_epochs=$EPOCHS \
                         	--checkpoint_interval=$CP_INTERVAL
 	
 	if [ -z $? ]; then
@@ -92,6 +96,7 @@ if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
         	                --output_dir=$OUT_DIR/$TEST_NAME \
                 	        --dataset cifar10_label_corrupted \
 				--corruption_type rand3 \
+				--train_epochs=$EPOCHS \
                         	--checkpoint_interval=$CP_INTERVAL
 
 	if [ -z $? ]; then
@@ -110,6 +115,7 @@ if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
         	                --output_dir=$OUT_DIR/$TEST_NAME \
                 	        --dataset cifar10_label_corrupted \
 				--corruption_type worst \
+				--train_epochs=$EPOCHS \
                         	--checkpoint_interval=$CP_INTERVAL
 
 	if [ -z $? ]; then
@@ -128,6 +134,7 @@ if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
         	                --output_dir=$OUT_DIR/$TEST_NAME \
                 	        --dataset cifar100 \
 				--corruption_type c100noise \
+				--train_epochs=$EPOCHS \
                         	--checkpoint_interval=$CP_INTERVAL
 
 	if [ -z $? ]; then

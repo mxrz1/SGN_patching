@@ -3,6 +3,7 @@
 PWD=$(pwd)
 DSET=cifar100
 CP_INTERVAL=10
+EPOCHS=300
 DATA_DIR=$PWD/data/$DSET
 OUT_DIR=$PWD/out/$DSET
 CACHE_DIR=$PWD/.cache/$DSET
@@ -36,6 +37,7 @@ if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
 	python src/cifar/sgn.py --data_dir=$DATA_DIR \
         	                --output_dir=$OUT_DIR/$TEST_NAME \
                 	        --dataset cifar100 \
+				--train_epochs=$EPOCHS \
                         	--checkpoint_interval=$CP_INTERVAL
 
 	if [ -z $? ]; then
@@ -57,6 +59,7 @@ if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
 				--noisy_labels \
 				--corruption_type sym \
 				--severity 0.2 \
+				--train_epochs=$EPOCHS \
                         	--checkpoint_interval=$CP_INTERVAL
 
 	if [ -z $? ]; then
@@ -77,6 +80,7 @@ if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
 				--noisy_labels \
 				--corruption_type sym \
 				--severity 0.4 \
+				--train_epochs=$EPOCHS \
                         	--checkpoint_interval=$CP_INTERVAL
 	
 	if [ -z $? ]; then
@@ -97,6 +101,7 @@ if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
 				--noisy_labels \
 				--corruption_type sym \
 				--severity 0.6 \
+				--train_epochs=$EPOCHS \
                         	--checkpoint_interval=$CP_INTERVAL
 
 	if [ -z $? ]; then
@@ -117,6 +122,7 @@ if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
 				--noisy_labels \
 				--corruption_type asym \
 				--severity 0.2 \
+				--train_epochs=$EPOCHS \
                         	--checkpoint_interval=$CP_INTERVAL
 
 	if [ -z $? ]; then
@@ -137,6 +143,7 @@ if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
 				--noisy_labels \
 				--corruption_type asym \
 				--severity 0.4 \
+				--train_epochs=$EPOCHS \
                         	--checkpoint_interval=$CP_INTERVAL
 
 	if [ -z $? ]; then
@@ -157,6 +164,7 @@ if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
 				--noisy_labels \
 				--corruption_type asym \
 				--severity 0.6 \
+				--train_epochs=$EPOCHS \
                         	--checkpoint_interval=$CP_INTERVAL
 
 	if [ -z $? ]; then
