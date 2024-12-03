@@ -1,7 +1,7 @@
 # !usr/bin/bash
 
 PWD=$(pwd)
-DSET=cifar10
+DSET=cifar100
 CP_INTERVAL=10
 EPOCHS=600
 DATA_DIR=$PWD/data/$DSET
@@ -34,11 +34,12 @@ echo "============== NO NOISE ================"
 TEST_NAME=no_noise
 
 if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
-	python src/cifar/sgn.py --data_dir=$DATA_DIR \
+	python src/cifar/deterministic.py --data_dir=$DATA_DIR \
         	                --output_dir=$OUT_DIR/$TEST_NAME \
-                	        --dataset cifar10 \
+                	        --dataset cifar100 \
 				--train_epochs=$EPOCHS \
-                        	--checkpoint_interval=$CP_INTERVAL
+                        	--checkpoint_interval=$CP_INTERVAL \
+                        	--label_smoothing 0.001
 
 	if [ -z $? ]; then
 		touch $CACHE_DIR/$TEST_NAME
@@ -53,14 +54,15 @@ echo
 TEST_NAME=sym20
 
 if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
-	python src/cifar/sgn.py --data_dir=$DATA_DIR \
+	python src/cifar/deterministic.py --data_dir=$DATA_DIR \
         	                --output_dir=$OUT_DIR/$TEST_NAME \
-                	        --dataset cifar10 \
+                	        --dataset cifar100 \
 				--noisy_labels \
 				--corruption_type sym \
 				--severity 0.2 \
 				--train_epochs=$EPOCHS \
-                        	--checkpoint_interval=$CP_INTERVAL
+                        	--checkpoint_interval=$CP_INTERVAL \
+                        	--label_smoothing 0.001
 
 	if [ -z $? ]; then
 		touch $CACHE_DIR/$TEST_NAME
@@ -74,14 +76,15 @@ echo
 TEST_NAME=sym40
 
 if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
-	python src/cifar/sgn.py --data_dir=$DATA_DIR \
-        	                --output_dir=$OUT_DIR/$TEST_NAME \
-                	        --dataset cifar10 \
+	python src/cifar/deterministic.py --data_dir=$DATA_DIR \
+				--output_dir=$OUT_DIR/$TEST_NAME \
+                	        --dataset cifar100 \
 				--noisy_labels \
 				--corruption_type sym \
 				--severity 0.4 \
 				--train_epochs=$EPOCHS \
-                        	--checkpoint_interval=$CP_INTERVAL
+                        	--checkpoint_interval=$CP_INTERVAL \
+                        	--label_smoothing 0.001
 	
 	if [ -z $? ]; then
 		touch $CACHE_DIR/$TEST_NAME
@@ -95,14 +98,15 @@ echo
 TEST_NAME=sym60
 
 if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
-	python src/cifar/sgn.py --data_dir=$DATA_DIR \
+	python src/cifar/deterministic.py --data_dir=$DATA_DIR \
         	                --output_dir=$OUT_DIR/$TEST_NAME \
-                	        --dataset cifar10 \
+                	        --dataset cifar100 \
 				--noisy_labels \
 				--corruption_type sym \
 				--severity 0.6 \
 				--train_epochs=$EPOCHS \
-                        	--checkpoint_interval=$CP_INTERVAL
+                        	--checkpoint_interval=$CP_INTERVAL \
+                        	--label_smoothing 0.001
 
 	if [ -z $? ]; then
 		touch $CACHE_DIR/$TEST_NAME
@@ -116,14 +120,15 @@ echo
 TEST_NAME=asym20
 
 if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
-	python src/cifar/sgn.py --data_dir=$DATA_DIR \
+	python src/cifar/deterministic.py --data_dir=$DATA_DIR \
         	                --output_dir=$OUT_DIR/$TEST_NAME \
-                	        --dataset cifar10 \
+                	        --dataset cifar100 \
 				--noisy_labels \
 				--corruption_type asym \
 				--severity 0.2 \
 				--train_epochs=$EPOCHS \
-                        	--checkpoint_interval=$CP_INTERVAL
+                        	--checkpoint_interval=$CP_INTERVAL \
+                        	--label_smoothing 0.001
 
 	if [ -z $? ]; then
 		touch $CACHE_DIR/$TEST_NAME
@@ -137,14 +142,15 @@ echo
 TEST_NAME=asym40
 
 if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
-	python src/cifar/sgn.py --data_dir=$DATA_DIR \
+	python src/cifar/deterministic.py --data_dir=$DATA_DIR \
         	                --output_dir=$OUT_DIR/$TEST_NAME \
-                	        --dataset cifar10 \
+                	        --dataset cifar100 \
 				--noisy_labels \
 				--corruption_type asym \
 				--severity 0.3 \
 				--train_epochs=$EPOCHS \
-                        	--checkpoint_interval=$CP_INTERVAL
+                        	--checkpoint_interval=$CP_INTERVAL \
+                        	--label_smoothing 0.001
 
 	if [ -z $? ]; then
 		touch $CACHE_DIR/$TEST_NAME
@@ -158,14 +164,15 @@ echo
 TEST_NAME=asym60
 
 if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
-	python src/cifar/sgn.py --data_dir=$DATA_DIR \
+	python src/cifar/deterministic.py --data_dir=$DATA_DIR \
         	                --output_dir=$OUT_DIR/$TEST_NAME \
-                	        --dataset cifar10 \
+                	        --dataset cifar100 \
 				--noisy_labels \
 				--corruption_type asym \
 				--severity 0.4 \
 				--train_epochs=$EPOCHS \
-                        	--checkpoint_interval=$CP_INTERVAL
+                        	--checkpoint_interval=$CP_INTERVAL \
+                        	--label_smoothing 0.001
 
 	if [ -z $? ]; then
 		touch $CACHE_DIR/$TEST_NAME

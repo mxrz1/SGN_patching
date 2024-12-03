@@ -3,7 +3,7 @@
 PWD=$(pwd)
 DSET=cifar100
 CP_INTERVAL=10
-EPOCHS=300
+EPOCHS=600
 DATA_DIR=$PWD/data/$DSET
 OUT_DIR=$PWD/out/$DSET
 CACHE_DIR=$PWD/.cache/$DSET
@@ -132,7 +132,7 @@ else
 	echo "TEST CACHE FOUND, SKIPPING"
 fi
 
-echo "============== ASYM 40% ================"
+echo "============== ASYM 30% ================"
 echo
 TEST_NAME=asym40
 
@@ -142,7 +142,7 @@ if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
                 	        --dataset cifar100 \
 				--noisy_labels \
 				--corruption_type asym \
-				--severity 0.4 \
+				--severity 0.3 \
 				--train_epochs=$EPOCHS \
                         	--checkpoint_interval=$CP_INTERVAL
 
@@ -153,7 +153,7 @@ else
 	echo "TEST CACHE FOUND, SKIPPING"
 fi
 
-echo "============== ASYM 60% ================"
+echo "============== ASYM 40% ================"
 echo
 TEST_NAME=asym60
 
@@ -163,7 +163,7 @@ if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
                 	        --dataset cifar100 \
 				--noisy_labels \
 				--corruption_type asym \
-				--severity 0.6 \
+				--severity 0.4 \
 				--train_epochs=$EPOCHS \
                         	--checkpoint_interval=$CP_INTERVAL
 
