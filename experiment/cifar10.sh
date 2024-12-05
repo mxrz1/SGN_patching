@@ -4,11 +4,9 @@ PWD=$(pwd)
 DSET=cifar10
 CP_INTERVAL=10
 EPOCHS=600
-DATA_DIR=$PWD/data/$DSET
-OUT_DIR=$PWD/out/$DSET
-CACHE_DIR=$PWD/.cache/$DSET
-
-SGN_DIR=$1
+DATA_DIR=/home/baumana1/work/data/sgn_results/$DSET
+OUT_DIR=/home/baumana1/work/data/sgn_results/out/$DSET
+CACHE_DIR=/home/baumana1/work/data/sgn_results/.cache/$DSET
 
 if [ ! -d $DATA_DIR ]; then
 	mkdir $DATA_DIR
@@ -21,10 +19,6 @@ fi
 if [ ! -d $CACHE_DIR ]; then
 	mkdir $CACHE_DIR
 fi
-
-
-cd $SGN_DIR
-source .venv/bin/activate
 
 2>&1
 echo "============== RUNNING $DSET TESTS ================"
