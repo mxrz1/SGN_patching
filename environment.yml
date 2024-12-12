@@ -1,0 +1,9 @@
+name: sgn_env
+channels:
+    - nvidia
+    - pytorch
+    - conda-forge
+dependencies:
+    - python=3.9
+    - tensorflow=2.8.1=*cuda*
+

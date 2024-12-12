@@ -1,23 +1,23 @@
 # !usr/bin/bash
 
 PWD=$(pwd)
-DSET=cifar10
+DSET=cifar10sgn
 CP_INTERVAL=10
-EPOCHS=600
+EPOCHS=1
 DATA_DIR=/home/baumana1/work/data/sgn_results/$DSET
 OUT_DIR=/home/baumana1/work/data/sgn_results/out/$DSET
 CACHE_DIR=/home/baumana1/work/data/sgn_results/.cache/$DSET
 
 if [ ! -d $DATA_DIR ]; then
-	mkdir $DATA_DIR
+	mkdir -p $DATA_DIR
 fi
 
 if [ ! -d $OUT_DIR ]; then
-	mkdir $OUT_DIR
+	mkdir -p $OUT_DIR
 fi
 
 if [ ! -d $CACHE_DIR ]; then
-	mkdir $CACHE_DIR
+	mkdir -p $CACHE_DIR
 fi
 
 2>&1
@@ -31,8 +31,9 @@ if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
 	python src/cifar/sgn.py --data_dir=$DATA_DIR \
         	                --output_dir=$OUT_DIR/$TEST_NAME \
                 	        --dataset cifar10 \
-				--train_epochs=$EPOCHS \
-                        	--checkpoint_interval=$CP_INTERVAL
+							--train_epochs=$EPOCHS \
+                        	--checkpoint_interval=$CP_INTERVAL \
+							--download_data
 
 	if [ -z $? ]; then
 		touch $CACHE_DIR/$TEST_NAME
@@ -50,11 +51,12 @@ if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
 	python src/cifar/sgn.py --data_dir=$DATA_DIR \
         	                --output_dir=$OUT_DIR/$TEST_NAME \
                 	        --dataset cifar10 \
-				--noisy_labels \
-				--corruption_type sym \
-				--severity 0.2 \
-				--train_epochs=$EPOCHS \
-                        	--checkpoint_interval=$CP_INTERVAL
+							--noisy_labels \
+							--corruption_type sym \
+							--severity 0.2 \
+							--train_epochs=$EPOCHS \
+                        	--checkpoint_interval=$CP_INTERVAL \
+							--download_data
 
 	if [ -z $? ]; then
 		touch $CACHE_DIR/$TEST_NAME
@@ -71,11 +73,12 @@ if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
 	python src/cifar/sgn.py --data_dir=$DATA_DIR \
         	                --output_dir=$OUT_DIR/$TEST_NAME \
                 	        --dataset cifar10 \
-				--noisy_labels \
-				--corruption_type sym \
-				--severity 0.4 \
-				--train_epochs=$EPOCHS \
-                        	--checkpoint_interval=$CP_INTERVAL
+							--noisy_labels \
+							--corruption_type sym \
+							--severity 0.4 \
+							--train_epochs=$EPOCHS \
+                        	--checkpoint_interval=$CP_INTERVAL \
+							--download_data
 	
 	if [ -z $? ]; then
 		touch $CACHE_DIR/$TEST_NAME
@@ -92,11 +95,12 @@ if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
 	python src/cifar/sgn.py --data_dir=$DATA_DIR \
         	                --output_dir=$OUT_DIR/$TEST_NAME \
                 	        --dataset cifar10 \
-				--noisy_labels \
-				--corruption_type sym \
-				--severity 0.6 \
-				--train_epochs=$EPOCHS \
-                        	--checkpoint_interval=$CP_INTERVAL
+							--noisy_labels \
+							--corruption_type sym \
+							--severity 0.6 \
+							--train_epochs=$EPOCHS \
+                        	--checkpoint_interval=$CP_INTERVAL \
+							--download_data
 
 	if [ -z $? ]; then
 		touch $CACHE_DIR/$TEST_NAME
@@ -113,11 +117,12 @@ if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
 	python src/cifar/sgn.py --data_dir=$DATA_DIR \
         	                --output_dir=$OUT_DIR/$TEST_NAME \
                 	        --dataset cifar10 \
-				--noisy_labels \
-				--corruption_type asym \
-				--severity 0.2 \
-				--train_epochs=$EPOCHS \
-                        	--checkpoint_interval=$CP_INTERVAL
+							--noisy_labels \
+							--corruption_type asym \
+							--severity 0.2 \
+							--train_epochs=$EPOCHS \
+                        	--checkpoint_interval=$CP_INTERVAL \
+							--download_data
 
 	if [ -z $? ]; then
 		touch $CACHE_DIR/$TEST_NAME
@@ -134,11 +139,12 @@ if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
 	python src/cifar/sgn.py --data_dir=$DATA_DIR \
         	                --output_dir=$OUT_DIR/$TEST_NAME \
                 	        --dataset cifar10 \
-				--noisy_labels \
-				--corruption_type asym \
-				--severity 0.3 \
-				--train_epochs=$EPOCHS \
-                        	--checkpoint_interval=$CP_INTERVAL
+							--noisy_labels \
+							--corruption_type asym \
+							--severity 0.3 \
+							--train_epochs=$EPOCHS \
+                        	--checkpoint_interval=$CP_INTERVAL \
+							--download_data
 
 	if [ -z $? ]; then
 		touch $CACHE_DIR/$TEST_NAME
@@ -155,11 +161,12 @@ if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
 	python src/cifar/sgn.py --data_dir=$DATA_DIR \
         	                --output_dir=$OUT_DIR/$TEST_NAME \
                 	        --dataset cifar10 \
-				--noisy_labels \
-				--corruption_type asym \
-				--severity 0.4 \
-				--train_epochs=$EPOCHS \
-                        	--checkpoint_interval=$CP_INTERVAL
+							--noisy_labels \
+							--corruption_type asym \
+							--severity 0.4 \
+							--train_epochs=$EPOCHS \
+                        	--checkpoint_interval=$CP_INTERVAL \
+							--download_data
 
 	if [ -z $? ]; then
 		touch $CACHE_DIR/$TEST_NAME
