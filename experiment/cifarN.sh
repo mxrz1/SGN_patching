@@ -1,9 +1,9 @@
-# !usr/bin/bash
+#!/bin/bash
 
 PWD=$(pwd)
 DSET=cifarNsgn
-CP_INTERVAL=10
-EPOCHS=1
+CP_INTERVAL=100
+EPOCHS=600
 DATA_DIR=/home/baumana1/work/data/sgn_results/$DSET
 OUT_DIR=/home/baumana1/work/data/sgn_results/out/$DSET
 CACHE_DIR=/home/baumana1/work/data/sgn_results/.cache/$DSET
