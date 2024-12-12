@@ -7,140 +7,73 @@ EPOCHS=600
 DATA_DIR=/home/baumana1/work/data/sgn_results/$DSET
 OUT_DIR=/home/baumana1/work/data/sgn_results/out/$DSET
 CACHE_DIR=/home/baumana1/work/data/sgn_results/.cache/$DSET
+SCRIPTS_DIR=$PWD/scripts
 
-if [ ! -d $DATA_DIR ]; then
-	mkdir -p $DATA_DIR
-fi
+# Create necessary directories
+mkdir -p $DATA_DIR
+mkdir -p $OUT_DIR
+mkdir -p $CACHE_DIR
+mkdir -p $SCRIPTS_DIR
 
-if [ ! -d $OUT_DIR ]; then
-	mkdir -p $OUT_DIR
-fi
-
-if [ ! -d $CACHE_DIR ]; then
-	mkdir -p $CACHE_DIR
-fi
-
-2>&1
 echo "============== RUNNING $DSET TESTS ================"
 echo
 
+submit_job() {
+    TEST_NAME=$1
+    SCRIPT_NAME="${DSET}_$2"
+    DATASET=$3
+    CORRUPTION=$4
+    shift 4
+    JOB_SCRIPT="#!/bin/bash
+#SBATCH --gres=gpu:1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem-per-cpu=4G
+#SBATCH --time=10:29:00
+#SBATCH --account=aalto_users
+
+python src/cifar/sgn.py --data_dir=$DATA_DIR \
+                        --output_dir=$OUT_DIR/$TEST_NAME \
+                        --dataset $DATASET \
+                        --corruption_type $CORRUPTION \
+                        --train_epochs=$EPOCHS \
+                        --checkpoint_interval=$CP_INTERVAL \
+                        --download_data $@"
+
+    # Save the script in the scripts folder
+    SCRIPT_PATH=$SCRIPTS_DIR/$SCRIPT_NAME.sh
+    echo "$JOB_SCRIPT" > $SCRIPT_PATH
+    chmod +x $SCRIPT_PATH
+    sbatch $SCRIPT_PATH
+}
+
 echo "============== AGGREGATE ================"
 TEST_NAME=aggre
-
-if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
-	python src/cifar/sgn.py --data_dir=$DATA_DIR \
-        	                --output_dir=$OUT_DIR/$TEST_NAME \
-                	        --dataset cifar10 \
-							--corruption_type=aggre \
-							--train_epochs=$EPOCHS \
-                        	--checkpoint_interval=$CP_INTERVAL \
-							--download_data
-
-	if [ -z $? ]; then
-		touch $CACHE_DIR/$TEST_NAME
-	fi
-else
-	echo "TEST CACHE FOUND, SKIPPING"
-fi
-
+SCRIPT_NAME="aggre"
+submit_job $TEST_NAME $SCRIPT_NAME cifar10 aggre
 
 echo "============== RANDOM 1 ================"
-echo
 TEST_NAME=rand1
-
-if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
-	python src/cifar/sgn.py --data_dir=$DATA_DIR \
-        	                --output_dir=$OUT_DIR/$TEST_NAME \
-                	       	--dataset cifar10 \
-							--corruption_type rand1 \
-							--train_epochs=$EPOCHS \
-                        	--checkpoint_interval=$CP_INTERVAL \
-							--download_data
-
-	if [ -z $? ]; then
-		touch $CACHE_DIR/$TEST_NAME
-	fi
-else
-	echo "TEST CACHE FOUND, SKIPPING"
-fi
+SCRIPT_NAME="rand1"
+submit_job $TEST_NAME $SCRIPT_NAME cifar10 rand1
 
 echo "============== RANDOM 2 ================"
-echo
 TEST_NAME=rand2
-
-if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
-	python src/cifar/sgn.py --data_dir=$DATA_DIR \
-        	                --output_dir=$OUT_DIR/$TEST_NAME \
-                	        --dataset cifar10 \
-							--corruption_type rand2 \
-							--train_epochs=$EPOCHS \
-                        	--checkpoint_interval=$CP_INTERVAL \
-							--download_data
-	
-	if [ -z $? ]; then
-		touch $CACHE_DIR/$TEST_NAME
-	fi
-else
-	echo "TEST CACHE FOUND, SKIPPING"
-fi
+SCRIPT_NAME="rand2"
+submit_job $TEST_NAME $SCRIPT_NAME cifar10 rand2
 
 echo "============== RANDOM 3 ================"
-echo
 TEST_NAME=rand3
-
-if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
-	python src/cifar/sgn.py --data_dir=$DATA_DIR \
-        	                --output_dir=$OUT_DIR/$TEST_NAME \
-                	        --dataset cifar10 \
-							--corruption_type rand3 \
-							--train_epochs=$EPOCHS \
-                        	--checkpoint_interval=$CP_INTERVAL \
-							--download_data
-
-	if [ -z $? ]; then
-		touch $CACHE_DIR/$TEST_NAME
-	fi
-else
-	echo "TEST CACHE FOUND, SKIPPING"
-fi
+SCRIPT_NAME="rand3"
+submit_job $TEST_NAME $SCRIPT_NAME cifar10 rand3
 
 echo "============== WORST ================"
-echo
 TEST_NAME=worst
-
-if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
-	python src/cifar/sgn.py --data_dir=$DATA_DIR \
-        	                --output_dir=$OUT_DIR/$TEST_NAME \
-                	        --dataset cifar10 \
-							--corruption_type worst \
-							--train_epochs=$EPOCHS \
-                        	--checkpoint_interval=$CP_INTERVAL \
-							--download_data
-
-	if [ -z $? ]; then
-		touch $CACHE_DIR/$TEST_NAME
-	fi
-else
-	echo "TEST CACHE FOUND, SKIPPING"
-fi
+SCRIPT_NAME="worst"
+submit_job $TEST_NAME $SCRIPT_NAME cifar10 worst
 
 echo "============== CIFAR-100N ================"
-echo
 TEST_NAME=cifar100
+SCRIPT_NAME="cifar100"
+submit_job $TEST_NAME $SCRIPT_NAME cifar100 c100noise
 
-if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
-	python3 src/cifar/sgn.py --data_dir=$DATA_DIR \
-        	                --output_dir=$OUT_DIR/$TEST_NAME \
-                	        --dataset cifar100 \
-							--corruption_type c100noise \
-							--train_epochs=$EPOCHS \
-                        	--checkpoint_interval=$CP_INTERVAL \
-							--download_data
-
-	if [ -z $? ]; then
-		touch $CACHE_DIR/$TEST_NAME
-	fi
-else
-	echo "TEST CACHE FOUND, SKIPPING"
-fi
-
+echo "All jobs submitted."

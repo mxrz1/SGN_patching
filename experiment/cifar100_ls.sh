@@ -7,175 +7,76 @@ EPOCHS=600
 DATA_DIR=/home/baumana1/work/data/sgn_results/$DSET
 OUT_DIR=/home/baumana1/work/data/sgn_results/out/$DSET
 CACHE_DIR=/home/baumana1/work/data/sgn_results/.cache/$DSET
+SCRIPTS_DIR=$PWD/scripts
 
-if [ ! -d $DATA_DIR ]; then
-	mkdir -p $DATA_DIR
-fi
+# Create necessary directories
+mkdir -p $DATA_DIR
+mkdir -p $OUT_DIR
+mkdir -p $CACHE_DIR
+mkdir -p $SCRIPTS_DIR
 
-if [ ! -d $OUT_DIR ]; then
-	mkdir -p $OUT_DIR
-fi
-
-if [ ! -d $CACHE_DIR ]; then
-	mkdir -p $CACHE_DIR
-fi
-
-2>&1
 echo "============== RUNNING $DSET TESTS ================"
 echo
 
+submit_job() {
+    TEST_NAME=$1
+    SCRIPT_NAME="${DSET}_$2"
+    shift 2
+    JOB_SCRIPT="#!/bin/bash
+#SBATCH --gres=gpu:1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem-per-cpu=4G
+#SBATCH --time=10:29:00
+#SBATCH --account=aalto_users
+
+python src/cifar/deterministic.py --data_dir=$DATA_DIR \
+                                  --output_dir=$OUT_DIR/$TEST_NAME \
+                                  --dataset cifar100 \
+                                  --train_epochs=$EPOCHS \
+                                  --checkpoint_interval=$CP_INTERVAL \
+                                  --label_smoothing 0.001 \
+                                  --download_data $@"
+
+    # Save the script in the scripts folder
+    SCRIPT_PATH=$SCRIPTS_DIR/$SCRIPT_NAME.sh
+    echo "$JOB_SCRIPT" > $SCRIPT_PATH
+    chmod +x $SCRIPT_PATH
+    sbatch $SCRIPT_PATH
+}
+
 echo "============== NO NOISE ================"
 TEST_NAME=no_noise
-
-if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
-	python src/cifar/deterministic.py --data_dir=$DATA_DIR \
-        	                --output_dir=$OUT_DIR/$TEST_NAME \
-                	        --dataset cifar100 \
-							--train_epochs=$EPOCHS \
-                        	--checkpoint_interval=$CP_INTERVAL \
-                        	--label_smoothing 0.001 \
-							--download_data
-
-	if [ -z $? ]; then
-		touch $CACHE_DIR/$TEST_NAME
-	fi
-else
-	echo "TEST CACHE FOUND, SKIPPING"
-fi
-
+SCRIPT_NAME="no_noise"
+submit_job $TEST_NAME $SCRIPT_NAME
 
 echo "============== SYM 20% ================"
-echo
 TEST_NAME=sym20
-
-if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
-	python src/cifar/deterministic.py --data_dir=$DATA_DIR \
-        	                --output_dir=$OUT_DIR/$TEST_NAME \
-                	        --dataset cifar100 \
-							--noisy_labels \
-							--corruption_type sym \
-							--severity 0.2 \
-							--train_epochs=$EPOCHS \
-                        	--checkpoint_interval=$CP_INTERVAL \
-                        	--label_smoothing 0.001 \
-							--download_data
-
-	if [ -z $? ]; then
-		touch $CACHE_DIR/$TEST_NAME
-	fi
-else
-	echo "TEST CACHE FOUND, SKIPPING"
-fi
+SCRIPT_NAME="sym20"
+submit_job $TEST_NAME $SCRIPT_NAME --noisy_labels --corruption_type sym --severity 0.2
 
 echo "============== SYM 40% ================"
-echo
 TEST_NAME=sym40
-
-if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
-	python src/cifar/deterministic.py --data_dir=$DATA_DIR \
-							--output_dir=$OUT_DIR/$TEST_NAME \
-                	        --dataset cifar100 \
-							--noisy_labels \
-							--corruption_type sym \
-							--severity 0.4 \
-							--train_epochs=$EPOCHS \
-                        	--checkpoint_interval=$CP_INTERVAL \
-                        	--label_smoothing 0.001 \
-							--download_data
-	
-	if [ -z $? ]; then
-		touch $CACHE_DIR/$TEST_NAME
-	fi
-else
-	echo "TEST CACHE FOUND, SKIPPING"
-fi
+SCRIPT_NAME="sym40"
+submit_job $TEST_NAME $SCRIPT_NAME --noisy_labels --corruption_type sym --severity 0.4
 
 echo "============== SYM 60% ================"
-echo
 TEST_NAME=sym60
-
-if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
-	python src/cifar/deterministic.py --data_dir=$DATA_DIR \
-        	                --output_dir=$OUT_DIR/$TEST_NAME \
-                	        --dataset cifar100 \
-							--noisy_labels \
-							--corruption_type sym \
-							--severity 0.6 \
-							--train_epochs=$EPOCHS \
-                        	--checkpoint_interval=$CP_INTERVAL \
-                        	--label_smoothing 0.001 \
-							--download_data
-
-	if [ -z $? ]; then
-		touch $CACHE_DIR/$TEST_NAME
-	fi
-else
-	echo "TEST CACHE FOUND, SKIPPING"
-fi
+SCRIPT_NAME="sym60"
+submit_job $TEST_NAME $SCRIPT_NAME --noisy_labels --corruption_type sym --severity 0.6
 
 echo "============== ASYM 20% ================"
-echo
 TEST_NAME=asym20
-
-if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
-	python src/cifar/deterministic.py --data_dir=$DATA_DIR \
-        	                --output_dir=$OUT_DIR/$TEST_NAME \
-                	        --dataset cifar100 \
-				--noisy_labels \
-				--corruption_type asym \
-				--severity 0.2 \
-				--train_epochs=$EPOCHS \
-                        	--checkpoint_interval=$CP_INTERVAL \
-                        	--label_smoothing 0.001
-
-	if [ -z $? ]; then
-		touch $CACHE_DIR/$TEST_NAME
-	fi
-else
-	echo "TEST CACHE FOUND, SKIPPING"
-fi
+SCRIPT_NAME="asym20"
+submit_job $TEST_NAME $SCRIPT_NAME --noisy_labels --corruption_type asym --severity 0.2
 
 echo "============== ASYM 30% ================"
-echo
-TEST_NAME=asym40
-
-if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
-	python src/cifar/deterministic.py --data_dir=$DATA_DIR \
-        	                --output_dir=$OUT_DIR/$TEST_NAME \
-                	        --dataset cifar100 \
-				--noisy_labels \
-				--corruption_type asym \
-				--severity 0.3 \
-				--train_epochs=$EPOCHS \
-                        	--checkpoint_interval=$CP_INTERVAL \
-                        	--label_smoothing 0.001
-
-	if [ -z $? ]; then
-		touch $CACHE_DIR/$TEST_NAME
-	fi
-else
-	echo "TEST CACHE FOUND, SKIPPING"
-fi
+TEST_NAME=asym30
+SCRIPT_NAME="asym30"
+submit_job $TEST_NAME $SCRIPT_NAME --noisy_labels --corruption_type asym --severity 0.3
 
 echo "============== ASYM 40% ================"
-echo
-TEST_NAME=asym60
+TEST_NAME=asym40
+SCRIPT_NAME="asym40"
+submit_job $TEST_NAME $SCRIPT_NAME --noisy_labels --corruption_type asym --severity 0.4
 
-if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
-	python src/cifar/deterministic.py --data_dir=$DATA_DIR \
-        	                --output_dir=$OUT_DIR/$TEST_NAME \
-                	        --dataset cifar100 \
-				--noisy_labels \
-				--corruption_type asym \
-				--severity 0.4 \
-				--train_epochs=$EPOCHS \
-                        	--checkpoint_interval=$CP_INTERVAL \
-                        	--label_smoothing 0.001
-
-	if [ -z $? ]; then
-		touch $CACHE_DIR/$TEST_NAME
-	fi
-else
-	echo "TEST CACHE FOUND, SKIPPING"
-fi
-
+echo "All jobs submitted."
