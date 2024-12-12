@@ -1,30 +1,24 @@
 # !usr/bin/bash
 
 PWD=$(pwd)
-DSET=cifar100
+DSET=cifar100ls
 CP_INTERVAL=10
-EPOCHS=600
-DATA_DIR=$PWD/data/$DSET
-OUT_DIR=$PWD/out/$DSET
-CACHE_DIR=$PWD/.cache/$DSET
-
-SGN_DIR=$1
+EPOCHS=1
+DATA_DIR=/home/baumana1/work/data/sgn_results/$DSET
+OUT_DIR=/home/baumana1/work/data/sgn_results/out/$DSET
+CACHE_DIR=/home/baumana1/work/data/sgn_results/.cache/$DSET
 
 if [ ! -d $DATA_DIR ]; then
-	mkdir $DATA_DIR
+	mkdir -p $DATA_DIR
 fi
 
 if [ ! -d $OUT_DIR ]; then
-	mkdir $OUT_DIR
+	mkdir -p $OUT_DIR
 fi
 
 if [ ! -d $CACHE_DIR ]; then
-	mkdir $CACHE_DIR
+	mkdir -p $CACHE_DIR
 fi
-
-
-cd $SGN_DIR
-source .venv/bin/activate
 
 2>&1
 echo "============== RUNNING $DSET TESTS ================"
@@ -37,9 +31,10 @@ if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
 	python src/cifar/deterministic.py --data_dir=$DATA_DIR \
         	                --output_dir=$OUT_DIR/$TEST_NAME \
                 	        --dataset cifar100 \
-				--train_epochs=$EPOCHS \
+							--train_epochs=$EPOCHS \
                         	--checkpoint_interval=$CP_INTERVAL \
-                        	--label_smoothing 0.001
+                        	--label_smoothing 0.001 \
+							--download_data
 
 	if [ -z $? ]; then
 		touch $CACHE_DIR/$TEST_NAME
@@ -57,12 +52,13 @@ if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
 	python src/cifar/deterministic.py --data_dir=$DATA_DIR \
         	                --output_dir=$OUT_DIR/$TEST_NAME \
                 	        --dataset cifar100 \
-				--noisy_labels \
-				--corruption_type sym \
-				--severity 0.2 \
-				--train_epochs=$EPOCHS \
+							--noisy_labels \
+							--corruption_type sym \
+							--severity 0.2 \
+							--train_epochs=$EPOCHS \
                         	--checkpoint_interval=$CP_INTERVAL \
-                        	--label_smoothing 0.001
+                        	--label_smoothing 0.001 \
+							--download_data
 
 	if [ -z $? ]; then
 		touch $CACHE_DIR/$TEST_NAME
@@ -77,14 +73,15 @@ TEST_NAME=sym40
 
 if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
 	python src/cifar/deterministic.py --data_dir=$DATA_DIR \
-				--output_dir=$OUT_DIR/$TEST_NAME \
+							--output_dir=$OUT_DIR/$TEST_NAME \
                 	        --dataset cifar100 \
-				--noisy_labels \
-				--corruption_type sym \
-				--severity 0.4 \
-				--train_epochs=$EPOCHS \
+							--noisy_labels \
+							--corruption_type sym \
+							--severity 0.4 \
+							--train_epochs=$EPOCHS \
                         	--checkpoint_interval=$CP_INTERVAL \
-                        	--label_smoothing 0.001
+                        	--label_smoothing 0.001 \
+							--download_data
 	
 	if [ -z $? ]; then
 		touch $CACHE_DIR/$TEST_NAME
@@ -101,12 +98,13 @@ if [ ! -f $CACHE_DIR/$TEST_NAME ]; then
 	python src/cifar/deterministic.py --data_dir=$DATA_DIR \
         	                --output_dir=$OUT_DIR/$TEST_NAME \
                 	        --dataset cifar100 \
-				--noisy_labels \
-				--corruption_type sym \
-				--severity 0.6 \
-				--train_epochs=$EPOCHS \
+							--noisy_labels \
+							--corruption_type sym \
+							--severity 0.6 \
+							--train_epochs=$EPOCHS \
                         	--checkpoint_interval=$CP_INTERVAL \
-                        	--label_smoothing 0.001
+                        	--label_smoothing 0.001 \
+							--download_data
 
 	if [ -z $? ]; then
 		touch $CACHE_DIR/$TEST_NAME
