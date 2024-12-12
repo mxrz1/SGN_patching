@@ -9,15 +9,15 @@ OUT_DIR=/home/baumana1/work/data/sgn_results/out/$DSET
 CACHE_DIR=/home/baumana1/work/data/sgn_results/.cache/$DSET
 
 if [ ! -d $DATA_DIR ]; then
-	mkdir $DATA_DIR
+	mkdir -p $DATA_DIR
 fi
 
 if [ ! -d $OUT_DIR ]; then
-	mkdir $OUT_DIR
+	mkdir -p $OUT_DIR
 fi
 
 if [ ! -d $CACHE_DIR ]; then
-	mkdir $CACHE_DIR
+	mkdir -p $CACHE_DIR
 fi
 
 
