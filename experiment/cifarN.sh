@@ -49,31 +49,31 @@ python src/cifar/sgn.py --data_dir=$DATA_DIR \
 echo "============== AGGREGATE ================"
 TEST_NAME=aggre
 SCRIPT_NAME="aggre"
-submit_job $TEST_NAME $SCRIPT_NAME cifar10 aggre
+submit_job $TEST_NAME $SCRIPT_NAME cifar10 aggre --alpha 0.999
 
 echo "============== RANDOM 1 ================"
 TEST_NAME=rand1
 SCRIPT_NAME="rand1"
-submit_job $TEST_NAME $SCRIPT_NAME cifar10 rand1
+submit_job $TEST_NAME $SCRIPT_NAME cifar10 rand1 --alpha 0.995
 
 echo "============== RANDOM 2 ================"
 TEST_NAME=rand2
 SCRIPT_NAME="rand2"
-submit_job $TEST_NAME $SCRIPT_NAME cifar10 rand2
+submit_job $TEST_NAME $SCRIPT_NAME cifar10 rand2 --alpha 0.997
 
 echo "============== RANDOM 3 ================"
 TEST_NAME=rand3
 SCRIPT_NAME="rand3"
-submit_job $TEST_NAME $SCRIPT_NAME cifar10 rand3
+submit_job $TEST_NAME $SCRIPT_NAME cifar10 rand3 --alpha 0.995
 
 echo "============== WORST ================"
 TEST_NAME=worst
 SCRIPT_NAME="worst"
-submit_job $TEST_NAME $SCRIPT_NAME cifar10 worst
+submit_job $TEST_NAME $SCRIPT_NAME cifar10 worst --alpha 0.993
 
 echo "============== CIFAR-100N ================"
 TEST_NAME=cifar100
 SCRIPT_NAME="cifar100"
-submit_job $TEST_NAME $SCRIPT_NAME cifar100 c100noise
+submit_job $TEST_NAME $SCRIPT_NAME cifar100 c100noise --alpha 0.993
 
 echo "All jobs submitted."

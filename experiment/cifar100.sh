@@ -46,36 +46,36 @@ python src/cifar/sgn.py --data_dir=$DATA_DIR \
 echo "============== NO NOISE ================"
 TEST_NAME=no_noise
 SCRIPT_NAME="no_noise"
-submit_job $TEST_NAME $SCRIPT_NAME
+submit_job $TEST_NAME $SCRIPT_NAME --alpha 0.997
 
 echo "============== SYM 20% ================"
 TEST_NAME=sym20
 SCRIPT_NAME="sym20"
-submit_job $TEST_NAME $SCRIPT_NAME --noisy_labels --corruption_type sym --severity 0.2
+submit_job $TEST_NAME $SCRIPT_NAME --noisy_labels --corruption_type sym --severity 0.2 --alpha 0.997
 
 echo "============== SYM 40% ================"
 TEST_NAME=sym40
 SCRIPT_NAME="sym40"
-submit_job $TEST_NAME $SCRIPT_NAME --noisy_labels --corruption_type sym --severity 0.4
+submit_job $TEST_NAME $SCRIPT_NAME --noisy_labels --corruption_type sym --severity 0.4 --alpha 0.995
 
 echo "============== SYM 60% ================"
 TEST_NAME=sym60
 SCRIPT_NAME="sym60"
-submit_job $TEST_NAME $SCRIPT_NAME --noisy_labels --corruption_type sym --severity 0.6
+submit_job $TEST_NAME $SCRIPT_NAME --noisy_labels --corruption_type sym --severity 0.6 --alpha 0.993
 
 echo "============== ASYM 20% ================"
 TEST_NAME=asym20
 SCRIPT_NAME="asym20"
-submit_job $TEST_NAME $SCRIPT_NAME --noisy_labels --corruption_type asym --severity 0.2
+submit_job $TEST_NAME $SCRIPT_NAME --noisy_labels --corruption_type asym --severity 0.2 --alpha 0.995
 
 echo "============== ASYM 30% ================"
 TEST_NAME=asym30
 SCRIPT_NAME="asym30"
-submit_job $TEST_NAME $SCRIPT_NAME --noisy_labels --corruption_type asym --severity 0.3
+submit_job $TEST_NAME $SCRIPT_NAME --noisy_labels --corruption_type asym --severity 0.3 --alpha 0.999
 
 echo "============== ASYM 40% ================"
 TEST_NAME=asym40
 SCRIPT_NAME="asym40"
-submit_job $TEST_NAME $SCRIPT_NAME --noisy_labels --corruption_type asym --severity 0.4
+submit_job $TEST_NAME $SCRIPT_NAME --noisy_labels --corruption_type asym --severity 0.4 --alpha 0.997
 
 echo "All jobs submitted."

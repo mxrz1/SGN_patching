@@ -50,31 +50,31 @@ python src/cifar/deterministic.py --data_dir=$DATA_DIR \
 echo "============== AGGREGATE ================"
 TEST_NAME=aggre
 SCRIPT_NAME="aggre"
-submit_job $TEST_NAME $SCRIPT_NAME cifar10 aggre
+submit_job $TEST_NAME $SCRIPT_NAME cifar10 aggre --label_smoothing 0.9
 
 echo "============== RANDOM 1 ================"
 TEST_NAME=rand1
 SCRIPT_NAME="rand1"
-submit_job $TEST_NAME $SCRIPT_NAME cifar10 rand1
+submit_job $TEST_NAME $SCRIPT_NAME cifar10 rand1 --label_smoothing 0.5
 
 echo "============== RANDOM 2 ================"
 TEST_NAME=rand2
 SCRIPT_NAME="rand2"
-submit_job $TEST_NAME $SCRIPT_NAME cifar10 rand2
+submit_job $TEST_NAME $SCRIPT_NAME cifar10 rand2 --label_smoothing 0.9
 
 echo "============== RANDOM 3 ================"
 TEST_NAME=rand3
 SCRIPT_NAME="rand3"
-submit_job $TEST_NAME $SCRIPT_NAME cifar10 rand3
+submit_job $TEST_NAME $SCRIPT_NAME cifar10 rand3 --label_smoothing 0.5
 
 echo "============== WORST ================"
 TEST_NAME=worst
 SCRIPT_NAME="worst"
-submit_job $TEST_NAME $SCRIPT_NAME cifar10 worst
+submit_job $TEST_NAME $SCRIPT_NAME cifar10 worst --label_smoothing 0.7
 
 echo "============== CIFAR-100N ================"
 TEST_NAME=cifar100
 SCRIPT_NAME="cifar100"
-submit_job $TEST_NAME $SCRIPT_NAME cifar100 c100noise
+submit_job $TEST_NAME $SCRIPT_NAME cifar100 c100noise --label_smoothing 0.9
 
 echo "All jobs submitted."

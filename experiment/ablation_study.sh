@@ -122,37 +122,37 @@ echo "============== XL ================="
 echo "============== CIFAR10_SYM40_XL ================"
 TEST_NAME=CIFAR10_SYM40_XL
 SCRIPT_NAME="$TEST_NAME.sh"
-submit_job $TEST_NAME $SCRIPT_NAME --dataset cifar10 --noisy_labels --corruption_type sym --severity 0.4 --disable_lr
+submit_job $TEST_NAME $SCRIPT_NAME --dataset cifar10 --noisy_labels --corruption_type sym --severity 0.4 --disable_lr --alpha 0.991
 
 echo "============== CIFAR10_ASYM40_XL ================"
 TEST_NAME=CIFAR10_ASYM40_XL
 SCRIPT_NAME="$TEST_NAME.sh"
-submit_job $TEST_NAME $SCRIPT_NAME --dataset cifar10 --noisy_labels --corruption_type asym --severity 0.4 --disable_lr
+submit_job $TEST_NAME $SCRIPT_NAME --dataset cifar10 --noisy_labels --corruption_type asym --severity 0.4 --disable_lr --alpha 0.997
 
 echo "============== CIFAR10N_RAND1_XL ================"
 TEST_NAME=CIFAR10N_RAND1_XL
 SCRIPT_NAME="$TEST_NAME.sh"
-submit_job $TEST_NAME $SCRIPT_NAME --dataset cifar10 --noisy_labels --corruption_type rand1 --disable_lr
+submit_job $TEST_NAME $SCRIPT_NAME --dataset cifar10 --noisy_labels --corruption_type rand1 --disable_lr --alpha 0.995
 
 echo "============== CIFAR10N_WORST_XL ================"
 TEST_NAME=CIFAR10N_WORST_XL
 SCRIPT_NAME="$TEST_NAME.sh"
-submit_job $TEST_NAME $SCRIPT_NAME --dataset cifar10 --noisy_labels --corruption_type worst --disable_lr
+submit_job $TEST_NAME $SCRIPT_NAME --dataset cifar10 --noisy_labels --corruption_type worst --disable_lr --alpha 0.993
 
 echo "============== CIFAR100_SYM40_XL ================"
 TEST_NAME=CIFAR100_SYM40_XL
 SCRIPT_NAME="$TEST_NAME.sh"
-submit_job $TEST_NAME $SCRIPT_NAME --dataset cifar100 --noisy_labels --corruption_type sym --severity 0.4 --disable_lr
+submit_job $TEST_NAME $SCRIPT_NAME --dataset cifar100 --noisy_labels --corruption_type sym --severity 0.4 --disable_lr --alpha 0.995
 
 echo "============== CIFAR100_ASYM40_XL ================"
 TEST_NAME=CIFAR100_ASYM40_XL
 SCRIPT_NAME="$TEST_NAME.sh"
-submit_job $TEST_NAME $SCRIPT_NAME --dataset cifar100 --noisy_labels --corruption_type asym --severity 0.4 --disable_lr
+submit_job $TEST_NAME $SCRIPT_NAME --dataset cifar100 --noisy_labels --corruption_type asym --severity 0.4 --disable_lr --alpha 0.997
 
 echo "============== CIFAR100N_XL ================"
 TEST_NAME=CIFAR100N_XL
 SCRIPT_NAME="$TEST_NAME.sh"
-submit_job $TEST_NAME $SCRIPT_NAME --dataset cifar100 --noisy_labels --corruption_type c100noise --disable_lr
+submit_job $TEST_NAME $SCRIPT_NAME --dataset cifar100 --noisy_labels --corruption_type c100noise --disable_lr --alpha 0.993
 
 
 echo "All jobs submitted."
