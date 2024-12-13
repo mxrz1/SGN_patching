@@ -4,9 +4,9 @@ PWD=$(pwd)
 DSET=cifar10ablation
 CP_INTERVAL=100
 EPOCHS=600
-DATA_DIR=/home/baumana1/work/data/sgn_results/$DSET
-OUT_DIR=/home/baumana1/work/data/sgn_results/out/$DSET
-CACHE_DIR=/home/baumana1/work/data/sgn_results/.cache/$DSET
+DATA_DIR=/home/baumana1/work/data/sgn_results_/$DSET
+OUT_DIR=/home/baumana1/work/data/sgn_results_/out/$DSET
+CACHE_DIR=/home/baumana1/work/data/sgn_results_/.cache/$DSET
 SCRIPTS_DIR=$PWD/scripts
 
 # Create necessary directories
