@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PWD=$(pwd)
-DSET=cifar10sgn
+DSET=cifar10ablation
 CP_INTERVAL=100
 EPOCHS=600
 DATA_DIR=/home/baumana1/work/data/sgn_results/$DSET
