@@ -29,7 +29,7 @@ submit_job() {
 #SBATCH --time=10:29:00
 #SBATCH --account=aalto_users
 
-python src/cifar/sgn_ablation --data_dir=$DATA_DIR \
+python src/cifar/sgn_ablation.py --data_dir=$DATA_DIR \
                         --output_dir=$OUT_DIR/$TEST_NAME \
                         --train_epochs=$EPOCHS \
                         --checkpoint_interval=$CP_INTERVAL \
