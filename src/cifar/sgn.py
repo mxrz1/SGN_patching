@@ -707,11 +707,16 @@ def main(argv):
         (epoch + 1) % FLAGS.checkpoint_interval == 0):
       checkpoint_name = checkpoint.save(
           os.path.join(FLAGS.output_dir, 'checkpoint'))
+      checkpoint_name_delta = checkpoint_delta.save(
+        os.path.join(FLAGS.output_dir, 'checkpoint_delta'))
       logging.info('Saved checkpoint to %s', checkpoint_name)
+      logging.info('Saved delta checkpoint to %s', checkpoint_name_delta)
 
-  final_checkpoint_name = checkpoint.save(
-      os.path.join(FLAGS.output_dir, 'checkpoint'))
+  final_checkpoint_name = checkpoint.save(os.path.join(FLAGS.output_dir, 'checkpoint'))
+  final_checkpoint_name_delta = checkpoint_delta.save(os.path.join(FLAGS.output_dir, 'checkpoint_delta'))
+
   logging.info('Saved last checkpoint to %s', final_checkpoint_name)
+  logging.info('Saved last delta checkpoint to %s', final_checkpoint_name_delta)
 
 if __name__ == '__main__':
   app.run(main)
