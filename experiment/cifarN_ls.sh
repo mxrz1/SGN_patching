@@ -37,7 +37,6 @@ python src/cifar/deterministic.py --data_dir=$DATA_DIR \
                                   --corruption_type $CORRUPTION \
                                   --train_epochs=$EPOCHS \
                                   --checkpoint_interval=$CP_INTERVAL \
-                                  --label_smoothing 0.001 \
                                   --download_data $@"
 
     # Save the script in the scripts folder
