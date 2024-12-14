@@ -1,5 +1,5 @@
-# (Patched) Shifted Gaussian Noise
-This is a modifed version of the SGN repository made by Erik Englesson. More specifically, it contains patches to SGN repository and its dependents edward2 and uncertainty-baselines to be able to run a specific working build using Tensorflow 2.8.1
+# Reproducing Shifted Gaussian Noise (SGN)
+This is a modifed version of the SGN repository made by @ErikEnglesson and @butterman0423. More specifically, it contains patches to SGN repository and its dependents edward2 and uncertainty-baselines to be able to run a specific working build using Tensorflow 2.8.1
 
 This was ran and tested on Ubuntu Server 24.0.1 with 12 Cores and 16 GB RAM.
 
@@ -42,6 +42,23 @@ or on WebVision
 python -u src/webvision/sgn.py --data_dir=/path/to/data/ \
                                --output_dir=/path/to/output_dir/
 ```
+
+### Experiment Scripts
+
+In the `experiments` folder you can find the scripts used to run the experiments in the paper.
+
+* `cifar10.sh` runs the SGN method on CIFAR-10 with all different synthetic noises.
+* `cifar100.sh` runs the SGN method on CIFAR-100 with all different synthetic noises.
+* `cifar10_ls.sh` runs the LS method on CIFAR-10 with all different synthetic noises.
+* `cifar100_ls.sh` runs the LS method on CIFAR-100 with all different synthetic noises.
+* ``cifarN.sh`` runs the SGN method on all CIFAR-N variations.
+* ``cifarN_ls.sh`` runs the LS method on all CIFAR-N variations.
+* `àblation_study.sh` runs the ablation study in Table 4 of the paper.
+
+
+`cifar10.sh`, `cifar100.sh`, `cifar10_ls.sh` and `cifar100_ls.sh` reproduce the results of Table 1 in the paper.
+
+`cifarN.sh` and `cifarN_ls.sh` reproduce the results of Table 2 in the paper.
 
 
 ## Reference
