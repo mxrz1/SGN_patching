@@ -1,9 +1,5 @@
 # Reproducing Shifted Gaussian Noise (SGN)
-This is a modifed version of the SGN repository made by @ErikEnglesson and @butterman0423. More specifically, it contains patches to SGN repository and its dependents edward2 and uncertainty-baselines to be able to run a specific working build using Tensorflow 2.8.1
-
-This was ran and tested on Ubuntu Server 24.0.1 with 12 Cores and 16 GB RAM.
-
-See installation instructions in INSTALL.md
+This is a modifed version of the SGN repository made by @ErikEnglesson and @butterman0423. More specifically, it contains patches to SGN repository and its dependents edward2 and uncertainty-baselines to be able to run a specific working build using Tensorflow 2.8.1 implemented by @butterman0423. Furthermore, we patched the `deterministic.py` model and extended the experiment scripts to run the main finding of the paper. 
 
 **NOTE**
 Clothing1M and Webvision tests are unavailalbe as they run into runtime issues. Working on a fix for that.
@@ -18,7 +14,7 @@ Deep neural networks and large-scale datasets have revolutionized the field of m
 Classification via Regression, Loss Reweighting, Label Correction, Robustness, Label Noise, Noisy Labels, Probabilistic Machine Learning, Compositional Data Analysis, Isometric Log-Ratio Transform, Gaussian Likelihood.
 
 ## Environment Setup
-The code uses and is based on the [Uncertainty Baselines GitHub repository](https://github.com/google/uncertainty-baselines), please follow the installation instructions there.
+The code uses and is based on the [Uncertainty Baselines GitHub repository](https://github.com/google/uncertainty-baselines), please follow the installation instructions there. [Keep in mind that this repository is still very buggy and not so easy to get to run mainly due to outdated dependencies.]
 
 Our experiments were run with TensorFlow 2.6.0, TensorFlow Probability 0.14.1 and Uncertainty Baselines 0.0.7, on A100 GPUs.
 
@@ -32,16 +28,7 @@ python src/cifar/sgn.py --data_dir=/path/to/data/ \
                         --corruption_type sym \
                         --severity 0.4
 ```
-or on Clothing1M
-```bash
-python src/clothing1m/sgn.py --data_dir=/path/to/data/ \
-                             --output_dir=/path/to/output_dir/ 
-```
-or on WebVision
-```bash
-python -u src/webvision/sgn.py --data_dir=/path/to/data/ \
-                               --output_dir=/path/to/output_dir/
-```
+
 
 ### Experiment Scripts
 
