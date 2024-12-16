@@ -1,5 +1,5 @@
 # Reproducing Shifted Gaussian Noise (SGN)
-This is a modifed version of the SGN repository made by @ErikEnglesson and @butterman0423. More specifically, it contains patches to SGN repository and its dependents edward2 and uncertainty-baselines to be able to run a specific working build using Tensorflow 2.8.1 implemented by @butterman0423. Furthermore, we patched the `deterministic.py` model and extended the experiment scripts to run the main finding of the paper. 
+This is a modifed version of the SGN repository made by @ErikEnglesson and @butterman0423. More specifically, it contains patches to SGN repository and its dependents edward2 and uncertainty-baselines to be able to run a specific working build using Tensorflow 2.8.1 implemented by @butterman0423. Furthermore, we patched the `deterministic.py` model, extended the experiment scripts to run the main finding of the paper, added flags to SGN to disable loss reweighting (LR) (see `sgn_ablation.py`) and added a new version of SGN using Monte Carlo sampling. 
 
 **NOTE**
 Clothing1M and Webvision tests are unavailalbe as they run into runtime issues. Working on a fix for that.
